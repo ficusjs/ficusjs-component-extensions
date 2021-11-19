@@ -1,2 +1,5 @@
-# ficusjs-component-extensions
-Custom element and component extensions
+# FicusJS component extensions
+
+Functions for extending components.
+
+For documentation visit [https://docs.ficusjs.org/extending-components/](https://docs.ficusjs.org/extending-components/)
