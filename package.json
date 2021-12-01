@@ -1,6 +1,6 @@
 {
   "name": "@ficusjs/component-extensions",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Custom element and component extensions",
   "type": "module",
   "main": "dist/index.mjs",
@@ -12,6 +12,7 @@
     "build:all": "rollup -i src/index.mjs -o dist/index.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-styles": "rollup -i src/with-styles.mjs -o dist/with-styles.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-lazy-render": "rollup -i src/with-lazy-render.mjs -o dist/with-lazy-render.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-breakpoint-render": "rollup -i src/with-breakpoint-render.mjs -o dist/with-breakpoint-render.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "run-p serve open",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@ficusjs/core": "1.2.0",
+    "@ficusjs/renderers": "4.2.0",
     "cypress": "8.6.0",
     "http-server": "14.0.0",
     "npm-run-all": "4.1.5",
@@ -55,6 +57,9 @@
     },
     "./with-lazy-render": {
       "import": "./dist/with-lazy-render.mjs"
+    },
+    "./with-breakpoint-render": {
+      "import": "./dist/with-breakpoint-render.mjs"
     }
   },
   "standard": {
