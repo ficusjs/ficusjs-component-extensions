@@ -28,6 +28,30 @@ describe('App with styles', () => {
     })
   })
 
+  describe('single style tag', () => {
+    it('has a message element', () => {
+      cy.get('single-style-tag .message')
+        .should('exist')
+    })
+
+    it('has custom styles', () => {
+      cy.get('single-style-tag .message')
+        .then($el => {
+          const win = $el[0].ownerDocument.defaultView
+          const styles = win.getComputedStyle($el[0])
+          const bgColorValue = styles.getPropertyValue('background-color')
+          const colorValue = styles.getPropertyValue('color')
+          expect(bgColorValue).to.eq('rgb(255, 192, 203)')
+          expect(colorValue).to.eq('rgb(128, 0, 128)')
+        })
+    })
+
+    it('has head styles', () => {
+      cy.get('head > style[data-tag="single-style-tag"]')
+        .should('have.length', 1)
+    })
+  })
+
   describe('single link', () => {
     it('has a message element', () => {
       cy.get('single-link .message')
@@ -47,7 +71,7 @@ describe('App with styles', () => {
     })
 
     it('has head styles', () => {
-      cy.get('head > style[data-tag="single-link"]')
+      cy.get('head > link[data-tag="single-link"]')
         .should('have.length', 1)
     })
   })
