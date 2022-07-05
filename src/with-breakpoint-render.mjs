@@ -44,32 +44,43 @@ export function withBreakpointRender (breakpointConfig, options) {
     setBreakpointConfig (breakpointConfig) {
       const self = this
       self._breakpointConfig = breakpointConfig
+
       const sortedBreakpoints = Object.keys(breakpointConfig.breakpoints)
         .sort((a, b) => a - b)
 
+      if (!options.render) {
+        throw new Error("Dude, when using breakpoints, you must provide a 'render' method for the smallest screen size")
+      }
+
       const breakpointListeners = sortedBreakpoints.map((bp, idx) => {
-        let query
-        if (idx === 0) {
-          query = `only screen and (max-width: ${bp}px)`
-        } else if (idx === sortedBreakpoints.length - 1) {
-          query = `only screen and (min-width: ${parseInt(sortedBreakpoints[idx - 1], 10) + 1}px) and (max-width: ${bp}px)`
-          query = `only screen and (min-width: ${parseInt(bp, 10) + 1}px)`
-        } else {
-          query = `only screen and (min-width: ${parseInt(sortedBreakpoints[idx - 1], 10) + 1}px) and (max-width: ${bp}px)`
-        }
+        const query = `only screen and (min-width: ${bp}px)`
         const method = breakpointConfig.breakpoints[bp].method
         return {
           query,
           method,
           listener (e) {
-            if (e.matches && self[method]) {
-              self.render = self[method]
+            if (e.matches && options[method]) {
+              self.render = options[method]
               self._processRender()
             }
           },
           mediaQueryList: undefined,
           listenerSubscribed: false
         }
+      })
+
+      // add the default renderer for the smallest screen size
+      breakpointListeners.unshift({
+        query: `only screen and (max-width: ${sortedBreakpoints[0] - 1}px)`,
+        method: 'render',
+        listener (e) {
+          if (e.matches) {
+            self.render = options.render
+            self._processRender()
+          }
+        },
+        mediaQueryList: undefined,
+        listenerSubscribed: false
       })
 
       // remove any existing listeners
@@ -81,8 +92,8 @@ export function withBreakpointRender (breakpointConfig, options) {
 
       // set the initial render
       breakpointListeners.forEach(m => {
-        if (m.mediaQueryList.matches && self[m.method]) {
-          self.render = self[m.method]
+        if (m.mediaQueryList.matches && options[m.method]) {
+          self.render = options[m.method]
         }
       })
     }
