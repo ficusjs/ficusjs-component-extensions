@@ -5,9 +5,9 @@ createCustomElement(
   withBreakpointRender({
     reactive: true,
     breakpoints: {
-      992: { method: 'renderTablet' },
-      768: { method: 'renderMobile' },
-      1200: { method: 'renderDesktop' }
+      768: { method: 'renderTablet' },
+      992: { method: 'renderSmallDesktop' },
+      1200: { method: 'renderLargeDesktop' }
     }
   }, {
     renderer,
@@ -17,14 +17,17 @@ createCustomElement(
     updated () {
       console.log('updated!')
     },
+    renderSmallDesktop () {
+      return html`<span>Breakpoint render small desktop</span>`
+    },
     renderTablet () {
       return html`<span>Breakpoint render tablet</span>`
     },
-    renderMobile () {
-      return html`<span>Breakpoint render mobile</span>`
+    renderLargeDesktop () {
+      return html`<span>Breakpoint render large desktop</span>`
     },
-    renderDesktop () {
-      return html`<span>Breakpoint render desktop</span>`
+    render () {
+      return html`<span>Breakpoint render mobile</span>`
     }
   })
 )

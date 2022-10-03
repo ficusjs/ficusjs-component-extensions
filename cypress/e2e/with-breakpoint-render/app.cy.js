@@ -25,6 +25,7 @@ describe('Component breakpoint render', () => {
   [
     { width: 350, height: 700, expecting: 'Breakpoint render mobile' },
     { width: 780, height: 700, expecting: 'Breakpoint render tablet' },
-    { width: 1300, height: 700, expecting: 'Breakpoint render desktop' }
+    { width: 1024, height: 700, expecting: 'Breakpoint render small desktop' },
+    { width: 1300, height: 700, expecting: 'Breakpoint render large desktop' }
   ].forEach(e => resize(e))
 })
