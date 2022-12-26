@@ -33,10 +33,10 @@
   "author": "Matt Levy",
   "license": "MIT",
   "dependencies": {
-    "@ficusjs/core": "3.1.1"
+    "@ficusjs/core": "3.1.2"
   },
   "devDependencies": {
-    "@ficusjs/core": "3.1.1",
+    "@ficusjs/core": "3.1.2",
     "@ficusjs/renderers": "5.4.1",
     "cypress": "11.1.0",
     "http-server": "14.1.1",
