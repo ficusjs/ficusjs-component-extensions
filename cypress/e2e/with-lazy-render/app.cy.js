@@ -1,6 +1,6 @@
 /* global describe cy before it  */
 describe('Component lazy render', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('with-lazy-render')
   })
 
@@ -12,7 +12,7 @@ describe('Component lazy render', () => {
   })
 
   describe('scrolling down to reveal components', () => {
-    before(() => {
+    beforeEach(() => {
       cy.scrollTo(0, 2000)
     })
 

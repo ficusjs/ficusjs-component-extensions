@@ -1,6 +1,6 @@
 /* global describe cy before it expect  */
 describe('App with styles', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('with-styles')
   })
 

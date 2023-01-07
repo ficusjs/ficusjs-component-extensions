@@ -1,6 +1,6 @@
 /* global describe cy before it  */
 describe('Component breakpoint render', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('with-breakpoint-render')
   })
 
